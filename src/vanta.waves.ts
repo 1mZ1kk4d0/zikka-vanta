@@ -1,5 +1,5 @@
-import VantaBase, { VANTA } from './_base.js'
-import {rn,ri,sample} from './helpers.js'
+import VantaBase, { VANTA } from './_base'
+import {rn,ri,sample} from './helpers'
 
 let THREE = (typeof window == 'object' && window.THREE)
 

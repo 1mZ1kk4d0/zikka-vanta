@@ -1,4 +1,4 @@
-import ShaderBase, {VANTA} from './_shaderBase.js'
+import ShaderBase, {VANTA} from './_shaderBase'
 
 class Effect extends ShaderBase {}
 export default VANTA.register('RIPPLE', Effect)

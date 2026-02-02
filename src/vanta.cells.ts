@@ -1,21 +1,19 @@
-import ShaderBase, {VANTA} from './_shaderBase.js'
+import ShaderBase, { VANTA } from './_shaderBase';
+import type { VantaCellsOptions } from './types/vanta';
 
-class Effect extends ShaderBase {}
-export default VANTA.register('CELLS', Effect)
-
-Effect.prototype.defaultOptions = {
-  color1: 0x8c8c,
-  color2: 0xf2e735,
-  backgroundColor: 0xd7ff8f,
-  amplitudeFactor: 1.0,
-  ringFactor: 1.0,
-  rotationFactor: 1.0,
-  size: 1.5,
-  speed: 1.0,
-  scaleMobile: 3,
-}
-
-Effect.prototype.fragmentShader = `\
+class Effect extends ShaderBase {
+  static defaultOptions: Partial<VantaCellsOptions> = {
+    color1: 0x8c8c,
+    color2: 0xf2e735,
+    backgroundColor: 0xd7ff8f,
+    amplitudeFactor: 1.0,
+    ringFactor: 1.0,
+    rotationFactor: 1.0,
+    size: 1.5,
+    speed: 1.0,
+    scaleMobile: 3,
+  };
+  static fragmentShader = `\
 uniform vec2 iResolution;
 uniform vec2 iMouse;
 uniform float iTime;
@@ -50,7 +48,7 @@ float worley(vec2 p) {
 
 float fworley(vec2 p) {
     return sqrt(sqrt(sqrt(
-    1.1 * // light
+    1.1 *
     worley(p*5. + .3 + iTime*.0525) *
     sqrt(worley(p * 50. / size + 0.3 + iTime * -0.15)) *
     sqrt(sqrt(worley(p * -10. + 9.3))))));
@@ -67,4 +65,10 @@ void main() {
 
     gl_FragColor = vec4(pow(t, 1.0 - t) * (c1 + c2), 1.0);
 }
-`
+`;
+}
+
+(Effect as unknown as { prototype: { defaultOptions: object } }).prototype.defaultOptions = Effect.defaultOptions;
+(Effect as unknown as { prototype: { fragmentShader: string } }).prototype.fragmentShader = Effect.fragmentShader;
+
+export default VANTA.register('CELLS', Effect);

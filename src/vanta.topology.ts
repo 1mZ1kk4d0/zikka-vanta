@@ -1,8 +1,8 @@
 // Original effect by Kjetil Midtgarden Golid
 // https://github.com/kgolid/p5ycho/blob/master/topology/sketch.js
 
-import P5Base, {VANTA} from './_p5Base.js'
-import {color2Rgb} from './helpers.js'
+import P5Base, {VANTA} from './_p5Base'
+import {color2Rgb} from './helpers'
 
 let p5 = (typeof window == 'object') && window.p5
 
